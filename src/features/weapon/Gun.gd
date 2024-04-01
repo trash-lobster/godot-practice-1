@@ -1,24 +1,18 @@
 extends Node2D
 
-signal shoot_bullet(position)
-
-onready var cooldown = $"attack-cooldown"
+onready var cooldown = $AttackCooldown
+onready var gunTip = $GunTip
 
 export (PackedScene) var Bullet
 
 func _process(delta):
-	get_input();
-
-func get_input():
-	if Input.is_action_pressed("shoot") && Engine.get_idle_frames() % 5 == 0:
+	if Input.is_action_pressed("shoot"):
 		shoot()
 
 func shoot():
 	if (cooldown.is_stopped()):
 		var bullet = Bullet.instance()
-		var direction = global_position.normalized()
+		var direction = (gunTip.global_position - global_position).normalized()
 		# emit signal to generate bullet
-		
-		GlobalSignals.emit_signal("bullet_fired", bullet, global_position)
-		print("shooting!")
+		GlobalSignals.emit_signal("bullet_fired", bullet, gunTip.global_position, direction)
 		cooldown.start()

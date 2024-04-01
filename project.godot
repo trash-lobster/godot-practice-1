@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
+"base": "Reference",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://src/features/weapon/Bullet.gd"
+"path": "res://src/features/weapon/bullet.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -32,7 +32,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalSignals="*res://src/signals/globalSignals.gd"
+GlobalSignals="*res://src/signals/global-signals.gd"
 
 [editor]
 

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var speed = 300
 export (Vector2) var movement_direction
-onready var movement_control = $"movement-control"
+onready var movement_control = $MovementControl
 
 func _ready():
 	movement_control.connect("set_movement_direction", self, "get_movement_direction")
