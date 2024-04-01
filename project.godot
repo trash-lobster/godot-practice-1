@@ -30,6 +30,10 @@ config/name="Godot Practice 1"
 run/main_scene="res://src/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSignals="*res://src/signals/globalSignals.gd"
+
 [editor]
 
 version_control_autoload_on_startup=true

@@ -1,22 +1,24 @@
 extends Node2D
 
-const BulletResource = preload("res://Bullet.tscn")
-onready var attack_cooldown = $AttackCooldown
+signal shoot_bullet(position)
+
+onready var cooldown = $"attack-cooldown"
+
+export (PackedScene) var Bullet
 
 func _process(delta):
 	get_input();
 
 func get_input():
 	if Input.is_action_pressed("shoot") && Engine.get_idle_frames() % 5 == 0:
-		shoot(global_position)
+		shoot()
 
-func shoot(global_position: Vector2):
-	# pass in a direction to shoot at
-	# the bullet will naturally move at the direction
-	
-	# emit signal to generate bullet
-	
-	var bullet = BulletResource.instance()
-	bullet.velocity = global_position
-	self.add_child(bullet)
-	
+func shoot():
+	if (cooldown.is_stopped()):
+		var bullet = Bullet.instance()
+		var direction = global_position.normalized()
+		# emit signal to generate bullet
+		
+		GlobalSignals.emit_signal("bullet_fired", bullet, global_position)
+		print("shooting!")
+		cooldown.start()
