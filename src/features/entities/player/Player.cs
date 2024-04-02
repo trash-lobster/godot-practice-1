@@ -5,12 +5,18 @@ public class Player : KinematicBody2D
 	public int Speed { get; set; } = 300;
 	public Vector2 MovementDirection { get; set; }
 	public MovementControl MovementControl { get; set; }
+	public Allegiance Allegiance { get; set; } = Allegiance.ALLY;
 
 	public override void _Ready()
 	{
 		MovementControl = (MovementControl) GetNode("MovementControl");
 		MovementControl.Connect(nameof(MovementControl.SetMovementDirection), this, nameof(GetMovementDirection));
 		MovementControl.Speed = Speed;
+
+		// add gun component
+		var gun = (Gun) ResourceLoader.Load<PackedScene>("res://src//features//weapon//Gun.tscn").Instance();
+		AddChild(gun);
+		gun.Allegiance = Allegiance;
 	}
 
 	public override void _PhysicsProcess(float delta)

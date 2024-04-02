@@ -1,5 +1,6 @@
-enum TEAM
+public enum Allegiance
 {
 	ALLY,
-	ENEMY
+	ENEMY,
+	NEUTRAL
 }

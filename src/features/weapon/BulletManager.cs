@@ -8,9 +8,10 @@ public class BulletManager : Node
 		signals.Connect("BulletFired", this, nameof(HandleBullet));
 	}
 
-	public void HandleBullet(Bullet bullet, Vector2 position, Vector2 direction)
+	public void HandleBullet(Bullet bullet, Allegiance allegiance, Vector2 position, Vector2 direction)
 	{
 		AddChild(bullet);
+		bullet.Allegiance = allegiance;
 		bullet.GlobalPosition = position;
 		bullet.SetDirection(direction);
 	}

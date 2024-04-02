@@ -6,6 +6,7 @@ public class Gun : Node2D
 	private Position2D GunTip { get; set; }
 	[Export]
 	public PackedScene Bullet { get; set; }
+	public Allegiance Allegiance { get; set; }
 
 	public override void _Ready()
 	{
@@ -23,11 +24,11 @@ public class Gun : Node2D
 
 	public void Shoot()
 	{
-		var bullet = ResourceLoader.Load<PackedScene>("res://src//features//weapon//bullet.tscn").Instance();
+		var bullet = ResourceLoader.Load<PackedScene>("res://src//features//weapon//Bullet.tscn").Instance();
 		var direction = (GunTip.GlobalPosition - GlobalPosition).Normalized();
 
 		GlobalSignal signals = (GlobalSignal) GetNode("/root/GlobalSignal");
-		signals.EmitSignal("BulletFired", (Bullet) bullet, GunTip.GlobalPosition, direction);
+		signals.EmitSignal("BulletFired", (Bullet) bullet, Allegiance, GunTip.GlobalPosition, direction);
 		AttackCooldown.Start();
 	}
 
