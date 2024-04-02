@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/features/weapon/Gun.gd" type="Script" id=1]
+[ext_resource path="res://src/features/weapon/gun.gd" type="Script" id=1]
+[ext_resource path="res://src/features/weapon/bullet.tscn" type="PackedScene" id=2]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
+Bullet = ExtResource( 2 )
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="GunTip" type="Position2D" parent="."]
+position = Vector2( 16, 0 )

@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
+"base": "Reference",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://src/features/weapon/Bullet.gd"
+"path": "res://src/features/weapon/bullet.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -29,6 +29,10 @@ _global_script_class_icons={
 config/name="Godot Practice 1"
 run/main_scene="res://src/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSignals="*res://src/signals/global-signals.gd"
 
 [editor]
 
