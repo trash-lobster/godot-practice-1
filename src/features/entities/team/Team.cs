@@ -1,0 +1,5 @@
+enum TEAM
+{
+	ALLY,
+	ENEMY
+}
