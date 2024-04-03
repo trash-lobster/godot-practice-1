@@ -1,14 +1,14 @@
 using Godot;
 
-public class Player : KinematicBody2D
+public class Player : HittableEntity
 {
 	public int Speed { get; set; } = 300;
 	public Vector2 MovementDirection { get; set; }
 	public MovementControl MovementControl { get; set; }
-	public Allegiance Allegiance { get; set; } = Allegiance.ALLY;
 
 	public override void _Ready()
 	{
+		Allegiance = Allegiance.ALLY;
 		MovementControl = (MovementControl) GetNode("MovementControl");
 		MovementControl.Connect(nameof(MovementControl.SetMovementDirection), this, nameof(GetMovementDirection));
 		MovementControl.Speed = Speed;

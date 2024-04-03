@@ -26,16 +26,13 @@ public class Bullet : Area2D
 		Rotation += Direction.Angle();
 	}
 
-	public void HandleCollision(Enemy collidingObject)
+	public void HandleCollision(HittableEntity body)
 	{
-		var collidingAllegiance = collidingObject.Allegiance;
-
-		if (collidingAllegiance != Allegiance && collidingAllegiance != Allegiance.NEUTRAL)
+		if (body.Allegiance != Allegiance && body.Allegiance != Allegiance.NEUTRAL)
 		{
-			// emit signal that the object has been hit
-			GD.Print("hit");
-			collidingObject.HandleHit();
+			GD.Print("We are hitting someone we should be hitting!");
+			body.HandleHit();
+			QueueFree();
 		}
-		QueueFree();
 	}
 }
