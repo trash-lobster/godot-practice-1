@@ -3,5 +3,8 @@ using Godot;
 public class GlobalSignal : Node
 {
 	[Signal]
-	public delegate void BulletFired(Bullet bullet, Allegiance allegiance, Vector2 position, Vector2 direction);
+	public delegate void BulletFired(Bullet bullet, string allegiance, Vector2 position, Vector2 direction);
+
+	[Signal]
+	public delegate void Hit(HittableEntity entity, string allegiance);
 }

@@ -6,7 +6,7 @@ public class Gun : Node2D
 	private Position2D GunTip { get; set; }
 	[Export]
 	public PackedScene Bullet { get; set; }
-	public Allegiance Allegiance { get; set; }
+	public string Allegiance { get; set; } = "neutral";
 
 	public override void _Ready()
 	{

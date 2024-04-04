@@ -1,12 +1,13 @@
 using Godot;
 
-public class Enemy : HittableEntity
+public class Enemy : KinematicBody2D
 {
 	public int Speed { get; set; } = 300;
 
 	public override void _Ready()
 	{
-		base._Ready();
-		Allegiance = Allegiance.ENEMY;
+		var hitComponent = new HittableEntity();
+		AddChild(hitComponent);
+		hitComponent.Allegiance = "enemy";
 	}
 }

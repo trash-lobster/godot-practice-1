@@ -4,7 +4,7 @@ public class Bullet : Area2D
 {
 	[Export]
 	public int Speed { get; set; } = 10;
-	public Allegiance Allegiance { get; set; } = Allegiance.NEUTRAL;
+	public string Allegiance { get; set; } = Team.GetNeutral();
 	private Vector2 Direction  { get; set; } = Vector2.Zero;
 
 	public override void _Ready()
@@ -28,11 +28,7 @@ public class Bullet : Area2D
 
 	public void HandleCollision(HittableEntity body)
 	{
-		if (body.Allegiance != Allegiance && body.Allegiance != Allegiance.NEUTRAL)
-		{
-			GD.Print("We are hitting someone we should be hitting!");
-			body.HandleHit();
-			QueueFree();
-		}
+		GlobalSignal signals = (GlobalSignal) GetNode("/root/GlobalSignal");
+		signals.EmitSignal(nameof(GlobalSignal.Hit), body, Allegiance);
 	}
 }

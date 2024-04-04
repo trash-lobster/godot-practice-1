@@ -1,23 +1,26 @@
 using Godot;
 
-public class Player : HittableEntity
+public class Player : KinematicBody2D
 {
 	public int Speed { get; set; } = 300;
 	public Vector2 MovementDirection { get; set; }
+	public HittableEntity HittableComponent { get; set; }
 
 	public override void _Ready()
 	{
-		Allegiance = Allegiance.ALLY;
+		HittableComponent = new HittableEntity();
+		AddChild(HittableComponent);
+		HittableComponent.Allegiance = "ally";
 
-		var movementControlNode = new MovementControl();
-		AddChild(movementControlNode);
-		movementControlNode.Connect("SetMovementDirection", this, nameof(GetMovementDirection));
-		movementControlNode.Speed = Speed;
+		var movementControlComponent = new MovementControl();
+		AddChild(movementControlComponent);
+		movementControlComponent.Connect("SetMovementDirection", this, nameof(GetMovementDirection));
+		movementControlComponent.Speed = Speed;
 
 		// add gun component
 		var gun = (Gun) ResourceLoader.Load<PackedScene>("res://src//features//weapon//Gun.tscn").Instance();
 		AddChild(gun);
-		gun.Allegiance = Allegiance;
+		gun.Allegiance = "ally";
 	}
 
 	public override void _PhysicsProcess(float delta)
