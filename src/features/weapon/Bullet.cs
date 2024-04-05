@@ -5,7 +5,7 @@ public class Bullet : Area2D
 	[Export]
 	public int Speed { get; set; } = 10;
 	public string Allegiance { get; set; } = Team.GetNeutral();
-	private Vector2 Direction  { get; set; } = Vector2.Zero;
+	private Vector2 Direction { get; set; } = Vector2.Zero;
 
 	public override void _Ready()
 	{
@@ -28,7 +28,7 @@ public class Bullet : Area2D
 
 	public void HandleCollision(HittableEntity body)
 	{
-		GlobalSignal signals = (GlobalSignal) GetNode("/root/GlobalSignal");
+		GlobalSignal signals = (GlobalSignal)GetNode("/root/GlobalSignal");
 		signals.EmitSignal(nameof(GlobalSignal.Hit), body, Allegiance);
 	}
 }

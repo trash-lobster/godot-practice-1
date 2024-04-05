@@ -15,11 +15,11 @@ public class Main : Node2D
 	{
 		var screenSize = GetViewport().GetVisibleRect().Size;
 		Random random = new Random();
-		var enemy = (Node2D) ResourceLoader.Load<PackedScene>("res://src//features//entities//enemy//Enemy.tscn").Instance();
+		var enemy = (Enemy) ResourceLoader.Load<PackedScene>("res://src//features//entities//enemy//Enemy.tscn").Instance();
 		AddChild(enemy);
 		Vector2 position = Vector2.Zero;
-		position.x = random.Next(0, (int) screenSize.x);
-		position.y = random.Next(0, (int) screenSize.y);
+		position.x = random.Next(0, (int)screenSize.x);
+		position.y = random.Next(0, (int)screenSize.y);
 		enemy.GlobalPosition = position;
 	}
 }
