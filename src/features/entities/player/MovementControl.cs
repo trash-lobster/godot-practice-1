@@ -1,23 +1,25 @@
+using System;
 using Godot;
 
-public class MovementControl : Node
+public class PlayerMovementControl : Node
 {
-	[Signal]
-	public delegate void SetMovementDirection(Vector2 direction);
 	public Vector2 Velocity { get; set; }
 	public int Speed { get; set; } = 300;
+	public Action<Vector2> UpdateDirection;
+	public BaseMovementDirectionComponent InputComponent;
 
 	public override void _Ready()
 	{
-
+		InputComponent = new InputDirectionComponent();
+		AddChild(InputComponent);
 	}
 
 	public override void _Process(float delta)
 	{
 		Velocity = Vector2.Zero;
-		var inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		var inputDirection = InputComponent.GetMovementDirection();
 		Velocity = inputDirection * Speed;
 
-		EmitSignal(nameof(SetMovementDirection), Velocity);
+		UpdateDirection(inputDirection);
 	}
 }

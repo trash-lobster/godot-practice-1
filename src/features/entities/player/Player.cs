@@ -12,10 +12,10 @@ public class Player : KinematicBody2D
 		AddChild(HittableComponent);
 		HittableComponent.Allegiance = "ally";
 
-		var movementControlComponent = new MovementControl();
+		var movementControlComponent = new PlayerMovementControl();
 		AddChild(movementControlComponent);
-		movementControlComponent.Connect("SetMovementDirection", this, nameof(GetMovementDirection));
 		movementControlComponent.Speed = Speed;
+		movementControlComponent.UpdateDirection = (value) => MovementDirection = value;
 
 		// add gun component
 		var gun = new Gun();
