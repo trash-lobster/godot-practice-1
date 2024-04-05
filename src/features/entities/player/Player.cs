@@ -18,7 +18,7 @@ public class Player : KinematicBody2D
 		movementControlComponent.Speed = Speed;
 
 		// add gun component
-		var gun = (Gun) ResourceLoader.Load<PackedScene>("res://src//features//weapon//Gun.tscn").Instance();
+		var gun = new Gun();
 		AddChild(gun);
 		gun.Allegiance = "ally";
 	}
